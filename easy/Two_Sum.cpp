@@ -6,17 +6,16 @@
 // you may not use the same element twice. You can return the answer in any order.
 
 # Evaluation
-// Runtime: 16 ms, faster than 32.05% of C++ online submissions for Two Sum.
-// Memory Usage: 11.1 MB, less than 10.62% of C++ online submissions for Two Sum.
+// Used a single-pass hashmap method to make it run faster. Tradeoff is memory.
+// Runtime: 8 ms, faster than 74.67% of C++ online submissions for Two Sum.
+// Memory Usage: 10.7 MB, less than 21.80% of C++ online submissions for Two Sum.
 
 
 vector<int> twoSum(vector<int>& nums, int target) {
-    map <int, int> find_number;
+    unordered_map <int, int> find_number;
     for (size_t i = 0; i < nums.size(); ++i) {
-        auto itr = find_number.find(nums[i]);
-        if (itr != find_number.end()) {
-            vector <int> v = {itr->second, (int)i};
-            return v;
+        if (find_number.find(nums[i]) != find_number.end()) {
+            return {find_number.find(nums[i])->second, (int)i};
         }
         find_number.insert(std::pair<int, int>(target-nums[i], (int)i));
     }
